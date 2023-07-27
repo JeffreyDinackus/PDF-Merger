@@ -2,17 +2,18 @@
 
 # Importing the required modules
 import time
-import PyPDF2
+from pypdf import PdfWriter
 
-def merge_pdfs(input_files, output_file):
+def merge_pdfs(file1, file2, output_file):
+    merger = PdfWriter()
+
     pdf_merger = PyPDF2.PdfMerger()
 
-    for file in input_files:
-        with open(file, 'rb') as pdf_file:
-            pdf_merger.append(pdf_file)
+    for pdf in []:
+        merger.append(pdf)
 
-    with open(output_file, 'wb') as merged_pdf:
-        pdf_merger.write(merged_pdf)
+    merger.write("merged-pdf.pdf")
+    merger.close()
 
 def main():
   print("Welcome to PDF Merger!")
@@ -26,7 +27,7 @@ def main():
   fiel1 = input("Enter the name of the file you want to go first in the merged PDF: ")
   file2 = input("Enter the name of the file you want to go second in the merged PDF: ")
 
-  merge_pdfs([fiel1, file2], output_file="merged.pdf")
+  merge_pdfs(fiel1, file2, output_file="merged.pdf")
   print("Merged PDF saved as 'merged.pdf'.")
   time.sleep(1)
   print("Thank you for using PDF Merger!")
